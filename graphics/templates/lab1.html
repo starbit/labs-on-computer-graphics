@@ -1,0 +1,17 @@
+{%extends "base.html"%}
+{%block title%}
+Labs on Computer Graphics
+{%endblock%}
+
+{%block content%}
+<canvas id="myCanvas" width="1300" height="500"style="border: 1px solid #CCC;" onclick="drawPoint(event,a,b)">
+    Fallback content, in case the browser does not support Canvas.
+</canvas>
+<button type="button" class="btn-success btn-large" onclick="finish()">
+    连线起点和终点
+</button>
+<button type="button" class="btn-info btn-large" onclick="edgeMarkFill()">
+    用边标志法填充
+</button>
+{%endblock%}
+
