@@ -6,17 +6,114 @@ startx = 0;
 starty = 0;
 draw = true;
 pattern = new Array(
-"00000000000000000000",
-"01110011100111001110",
-"01010010100001000010",
-"01010011100111000010",
-"01010010100100000010",
-"01110011100111000010",
-"00000000000000000000"
+"0000000000000000000000000000000000000000000000000000",
+"0000000000000000000000000000000000000000000000000000",
+"0000000000000000000000000000000000000000000000000000",
+"0000000000000000000000000000000000000000000000000000",
+"0000111111110000111111110000111111110000111111110000",
+"0000100000010000100000010000000000010000000000010000",
+"0000100000010000100000010000000000010000000000010000",
+"0000100000010000100000010000000000010000000000010000",
+"0000100000010000100000010000000000010000000000010000",
+"0000100000010000100000010000000000010000000000010000",
+"0000100000010000100000010000000000010000000000010000",
+"0000100000010000111111110000111111110000000000010000",
+"0000100000010000100000010000100000000000000000010000",
+"0000100000010000100000010000100000000000000000010000",
+"0000100000010000100000010000100000000000000000010000",
+"0000100000010000100000010000100000000000000000010000",
+"0000100000010000100000010000100000000000000000010000",
+"0000100000010000100000010000100000000000000000010000",
+"0000111111110000111111110000111111110000000000010000",
+"0000000000000000000000000000000000000000000000000000",
+"0000000000000000000000000000000000000000000000000000",
+"0000000000000000000000000000000000000000000000000000",
+"0000000000000000000000000000000000000000000000000000"
+
                         );
 MASK = new Array(500);
 pointArray = new Array();
 
+
+function edgeLine(x1,y1,x2,y2){
+    var xs,dxs;
+	var ys,Ixs;
+	var r;
+	if(y1==y2)
+	{
+		if(x1>x2)
+		{
+			r=x1;
+			x1=x2;
+			x2=r;
+		}
+		MASK[y1][x1]=true;
+        MASK[y1][x2]=true;
+	}
+	if(x1==x2)
+	{
+		if(y1>y2)
+		{
+			r=y1;
+			y1=y2;
+			y2=r;
+		}
+		for(ys=y1+1;ys<=y2;ys++)
+			MASK[ys][x1]=true;
+	}
+	if(x1<x2&&y1<y2)
+	{
+		xs=x1;
+		dxs=(x2-x1)/(y2-y1);
+		for(ys=y1+1;ys<=y2;ys++)       
+		{
+			xs=xs+dxs;
+			Ixs=parseInt(xs+0.5);
+			if(MASK[ys][Ixs]==true)
+				MASK[ys][Ixs+1]=true;
+			MASK[ys][Ixs]=true;
+		}
+	}
+	if(x1>x2&&y1<y2)
+	{
+		xs=x1;
+		dxs=(x1-x2)/(y2-y1);
+		for(ys=y1+1;ys<=y2;ys++)
+		{
+			xs=xs-dxs;
+			Ixs=parseInt(xs+0.5);
+			if(MASK[ys][Ixs]==true)
+				MASK[ys][Ixs+1]=true;
+			MASK[ys][Ixs]=true;
+		}
+	}
+	if(x1<x2&&y1>y2)
+	{
+		xs=x2;
+		dxs=(x2-x1)/(y1-y2);
+		for(ys=y2+1;ys<=y1;ys++)
+		{
+			xs=xs-dxs;
+			Ixs=parseInt(xs+0.5);
+			if(MASK[ys][Ixs]==true)
+				MASK[ys][Ixs+1]=true;
+			MASK[ys][Ixs]=true;
+		}
+	}
+	if(x1>x2&&y1>y2)
+	{
+		xs=x2;
+		dxs=(x1-x2)/(y1-y2);
+		for(ys=y2+1;ys<=y1;ys++)
+		{
+			xs=xs+dxs;
+			Ixs=parseInt(xs+0.5);
+			if(MASK[ys][Ixs]==true)
+				MASK[ys][Ixs+1]=true;
+			MASK[ys][Ixs]=true;
+		}
+	}
+}
 
 function edgeMarkFill(){
     for(var y = 0; y<MASK.length;y++){
@@ -26,15 +123,14 @@ function edgeMarkFill(){
         }
     }
     
+    
     for(var i = 0; i < pointArray.length-1;i++){
-        xs = pointArray[i][0];
-        dxs = (pointArray[i+1][0] - pointArray[i][0])/(pointArray[i+1][1]-pointArray[i][1]);
-        for(var ys = pointArray[i][1]; ys < pointArray[i+1][1]; ys++){
-            xs = xs + dxs;
-            Ixs = parseInt(xs + 0.5);
-            MASK[ys][Ixs] = !MASK[ys][Ixs];
-        }
+        edgeLine(pointArray[i][0],pointArray[i][1],pointArray[i+1][0],pointArray[i+1][1]);
     }
+        
+    
+    edgeLine(pointArray[0][0],pointArray[0][1],pointArray[pointArray.length-1][0],pointArray[pointArray.length-1][1]);
+    
 
     for(var y = 0;y<MASK.length;y++){
         inside = false;
@@ -42,7 +138,7 @@ function edgeMarkFill(){
             if(MASK[y][x]){
                 inside = !inside;
             }
-            if (inside){
+            if (inside && MASK[y][x]!=true){
                 patternFill(x,y);
             }
         }
@@ -83,7 +179,7 @@ function finish(){
 }
 
 function patternFill(x,y){
-    if (pattern[y%7].substr(x%20,1)=='1'){
+    if (pattern[y%23].substr(x%52,1)=='1'){
         cxt.fillStyle="#FFCCCC";
         cxt.beginPath();
         cxt.arc(x,y,1,0,Math.PI*2,true);
