@@ -1,0 +1,15 @@
+{%extends "base.html"%}
+{%block title%}
+Lab3 - Labs on Computer Graphics
+{%endblock%}
+
+{%block content%}
+<canvas id="myCanvas" width="1300" height="600"style="border: 1px solid #CCC;"onclick="draw(event)">
+    Fallback content, in case the browser does not support Canvas.
+</canvas>
+<button class="btn btn-success" onclick="finish()">完成多边形绘制</button>
+<button class="btn btn-success" onclick="Sutherland_Hodgman()">剪裁</button>
+<button class="btn btn-info">重画多边形</button>
+
+<script src="/static/js/lab3.js"></script>
+{%endblock%}

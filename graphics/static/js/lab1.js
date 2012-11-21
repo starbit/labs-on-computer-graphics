@@ -155,7 +155,7 @@ function drawPoint(e){
     cxt.arc(x,y,2,0,Math.PI*2,true);
     cxt.closePath();
     cxt.fill();
-    if(a!=0&b!=0){
+    if(a!=0&&b!=0){
         cxt.moveTo(a,b);
         cxt.lineTo(x,y);
         cxt.stroke();

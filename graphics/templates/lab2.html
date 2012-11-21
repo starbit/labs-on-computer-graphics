@@ -1,0 +1,45 @@
+{%extends "base.html"%}
+{%block title%}
+Lab2 - Labs on Computer Graphics
+{%endblock%}
+
+{%block content%}
+<canvas id="myCanvas" width="1300" height="600">
+    Fallback content, in case the browser does not support Canvas.
+</canvas>
+<ul class="nav nav-tabs">
+    <li class="dropup">
+        <a class="dropdown-toggle"
+            data-toggle="dropdown"
+            href="#">
+            投影变换
+            <b class="caret"></b>
+        </a>
+        <ul class="dropdown-menu">
+            <li><a href="javascript:onIsometrix()">等轴投影</a></li>
+            <li class="divider"></li>
+            <li><a href="javascript:onCabinet()">斜二测投影</a></li>
+            <li><a href="javascript:onCavalier()">斜等轴投影</a></li>
+            <li class="divider"></li>
+            <li><a href="javascript:onPerspective()">透视投影</a></li>
+        </ul>
+    </li>
+    <li class="dropup">
+        <a class="dropdown-toggle"
+            data-toggle="dropdown"
+            href="#">
+            图形变换
+            <b class="caret"></b>
+        </a>
+        <ul class="dropdown-menu">
+            <li><a href="javascript:on3dtranslate()">平移</a></li>
+            <li><a href="javascript:on3dscale()">比例</a></li>
+            <li><a href="javascript:on3drotate()">旋转</a></li>
+
+        </ul>
+    </li>
+
+</ul>
+<script src="/static/js/lab2.js"></script>
+{%endblock%}
+
