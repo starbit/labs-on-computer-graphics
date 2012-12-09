@@ -117,8 +117,8 @@ function Sutherland_Hodgman()
 function CutByTop(m_ClipedPly, sLength, m_Polygon)
 {
 	 yTop = m_LTPoint.y;
-     pre_Index=new Object();
-     cur_Index=new Object();
+    pre_Index=new Object();
+    cur_Index=new Object();
 	 pre_Index = sLength - 1;
 	 cur_Index = 0;
 	 S = m_ClipedPly[pre_Index];

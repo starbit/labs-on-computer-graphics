@@ -11,6 +11,8 @@ urlpatterns = patterns('',
     url(r'^lab1/', include('lab1.urls')),
     url(r'^lab2/', include('lab2.urls')),
     url(r'^lab3/', include('lab3.urls')),
+    url(r'^lab4/', include('lab4.urls')),
+    url(r'^lab5/', include('lab5.urls')),
 
 
     # Uncomment the admin/doc line below to enable admin documentation:

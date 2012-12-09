@@ -1,0 +1,29 @@
+{%extends "base.html"%}
+{%block title%}
+Lab2 - Labs on Computer Graphics
+{%endblock%}
+
+{%block content%}
+<canvas id="myCanvas" width="1300" height="600"style="border: 1px solid #CCC;"onclick="draw(event)">
+    Fallback content, in case the browser does not support Canvas.
+</canvas>
+<ul class="nav nav-tabs">
+    <li class="dropup">
+        <a class="dropdown-toggle"
+            data-toggle="dropdown"
+            href="#">
+            选择曲线
+            <b class="caret"></b>
+        </a>
+        <ul class="dropdown-menu">
+            <li><a href="javascript:setcurve(1)">Hermite</a></li>
+            <li class="divider"></li>
+            <li><a href="javascript:setcurve(2)">Bezier</a></li>
+            <li class="divider"></li>
+            <li><a href="javascript:setcurve(3)">三次B样条</a></li>
+        </ul>
+    </li>
+</ul>
+<script src="/static/js/lab4.js"></script>
+{%endblock%}
+
